@@ -157,7 +157,7 @@ function Footer() {
                   transition={{ duration: 0.6 }}
                 >
                   <img 
-                    src="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf (10 x 2 in) (1).png" 
+                    src={require('../assets/REMAX_mastrBalloon_RGB_R.pdf.pdf (10 x 2 in) (1).png')} 
                     alt="RE/MAX NOA" 
                     className="h-12 w-auto drop-shadow-lg bg-transparent" 
                     style={{

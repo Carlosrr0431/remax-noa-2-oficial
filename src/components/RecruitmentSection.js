@@ -260,7 +260,7 @@ function RecruitmentSection() {
               className="relative group"
             >
               <img 
-                src="/assets/premiados.jpg" 
+                src={require('../assets/premiados.jpg')} 
                 alt="Equipo premiado RE/MAX NOA" 
                 className="w-full rounded-3xl shadow-2xl border-4 border-white/50 backdrop-blur-sm"
               />

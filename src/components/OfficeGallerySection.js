@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 
 const officeImages = [
   {
-    src: "/assets/0122-DSC08806+B.jpg",
+    src: require('../assets/0122-DSC08806+B.jpg'),
     alt: "Oficina RE/MAX NOA - Área principal",
   },
   {
-    src: "/assets/0220 - _F6_1138 B (1) (1).jpg",
+    src: require('../assets/0220 - _F6_1138 B (1) (1).jpg'),
     alt: "Oficina RE/MAX NOA - Sala de reuniones",
   },
   {
-    src: "/assets/premiados.jpg",
+    src: require('../assets/premiados.jpg'),
     alt: "Equipo premiado RE/MAX NOA",
   },
 ];

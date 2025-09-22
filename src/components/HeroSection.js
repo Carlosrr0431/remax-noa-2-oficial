@@ -55,12 +55,12 @@ function HeroSection() {
       <motion.video
         style={{ y: yVideoParallax }}
         className="absolute inset-0 w-full h-full object-cover scale-105"
-        src="/assets/video 1920x1080_convención 2024 (1).mp4"
+        src={require('../assets/video 1920x1080_convención 2024 (1).mp4')}
         autoPlay
         loop
         muted
         playsInline
-        poster="/assets/0122-DSC08806+B.jpg"
+        poster={require('../assets/0122-DSC08806+B.jpg')}
       />
       
       {/* Overlay dinámico con gradiente animado */}

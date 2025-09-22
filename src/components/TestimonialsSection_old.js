@@ -5,17 +5,17 @@ const testimonials = [
   {
     name: "María López",
     text: "Ser agente RE/MAX NOA me permitió crecer profesionalmente y tener independencia financiera. El equipo es increíble!",
-    img: "/assets/0122-DSC08806+B.jpg",
+    img: require('../assets/0122-DSC08806+B.jpg'),
   },
   {
     name: "Carlos Pérez",
     text: "La capacitación y el soporte que recibí fueron clave para mi éxito. Recomiendo RE/MAX NOA a todos los que buscan una carrera inmobiliaria.",
-    img: "/assets/0220 - _F6_1138 B (1) (1).jpg",
+    img: require('../assets/0220 - _F6_1138 B (1) (1).jpg'),
   },
   {
     name: "Lucía Gómez",
     text: "La cultura colaborativa y las oportunidades de desarrollo son únicas. Aquí encontré mi lugar.",
-    img: "/assets/0549 - MAR_6717 B.jpg",
+    img: require('../assets/0549 - MAR_6717 B.jpg'),
   },
 ];
 

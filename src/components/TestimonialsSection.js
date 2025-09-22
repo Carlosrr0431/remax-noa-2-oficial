@@ -6,7 +6,7 @@ const videoTestimonials = [
     id: 1,
     name: "Emiliano García",
     role: "Agente Senior",
-    video: "/assets/videoEmiliano.MOV",
+    video: require('../assets/videoEmiliano.MOV'),
     description: "RE/MAX NOA cambió mi vida profesional completamente.",
     years: "4 años"
   },
@@ -14,7 +14,7 @@ const videoTestimonials = [
     id: 2,
     name: "Agustina Rodríguez",
     role: "Top Producer",
-    video: "/assets/VideoAgustina.MOV", 
+    video: require('../assets/VideoAgustina.MOV'), 
     description: "Encontré en RE/MAX NOA no solo una carrera, sino una familia.",
     years: "3 años"
   },
@@ -22,7 +22,7 @@ const videoTestimonials = [
     id: 3,
     name: "Equipo RE/MAX NOA",
     role: "Unidos por el éxito",
-    video: "/assets/IMG_4782.MOV",
+    video: require('../assets/IMG_4782.MOV'),
     description: "La fuerza radica en la colaboración y el compromiso compartido.",
     years: "Juntos"
   }
@@ -107,7 +107,7 @@ function TestimonialsSection() {
                     <video
                       ref={el => videoRefs.current[index] = el}
                       className="w-full h-64 object-cover"
-                      poster="/assets/0122-DSC08806+B.jpg"
+                      poster={require('../assets/0122-DSC08806+B.jpg')}
                       controls
                       preload="metadata"
                       playsInline
