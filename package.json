@@ -70,10 +70,13 @@
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {
-    "dev": "webpack serve --mode development",
+    "dev": "npx webpack serve --mode development",
     "start": "npm run dev",
-    "build": "webpack --mode production",
-    "build:analyze": "set ANALYZE=true && webpack --mode production",
+    "build": "node build.js",
+    "build:webpack": "npx webpack --mode production",
+    "build:node": "node build.js",
+    "build:vercel": "npx webpack --mode production --output-path dist",
+    "build:analyze": "set ANALYZE=true && npx webpack --mode production",
     "serve:build": "npx serve -s dist -l 3000",
     "clean": "rimraf dist",
     "lint": "echo Linting... && echo No linter configured",
@@ -83,7 +86,7 @@
     "audit:security": "npm audit --audit-level moderate",
     "audit:performance": "echo Performance audit - Use Lighthouse or similar tools",
     "preinstall": "node --version && npm --version",
-    "postinstall": "echo Installation complete - Run npm start to begin development",
+    "postinstall": "echo Installation complete - Run npm start to begin development && chmod +x node_modules/.bin/* 2>/dev/null || true",
     "postbuild": "echo Build complete - Files ready in /dist folder"
   },
   "pwa": {

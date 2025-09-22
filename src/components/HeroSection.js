@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 
 function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [wordIndex, setWordIndex] = useState(0);
   const { scrollY } = useScroll();
+  
+  // Palabras para la animación de texto dinámico
+  const words = ["innovación", "tecnología", "excelencia", "compromiso", "resultados", "confianza"];
   
   // Parallax effects
   const yVideoParallax = useTransform(scrollY, [0, 1000], [0, -200]);
@@ -30,7 +34,16 @@ function HeroSection() {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []); // Dependencias vacías para evitar re-renders infinitos
+  }, [xSpring, ySpring]);
+
+  // Effect para la animación de texto dinámico
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
+    }, 3000); // Cambia cada 3 segundos
+
+    return () => clearInterval(interval);
+  }, [words.length]);
 
   return (
     <section
@@ -143,7 +156,7 @@ function HeroSection() {
         {/* Título eliminado a pedido del usuario para destacar solo el globo animado */}
         <div className="mb-4" />
 
-        {/* Subtítulo premium */}
+        {/* Subtítulo premium con texto animado */}
         <motion.p
           initial={{ opacity: 0, y: 30, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -151,9 +164,26 @@ function HeroSection() {
           whileHover={{ scale: 1.02 }}
           className="text-xl md:text-2xl text-white/95 mb-12 max-w-3xl mx-auto leading-relaxed font-light backdrop-blur-sm bg-white/5 px-6 py-4 rounded-3xl border border-white/10 shadow-2xl"
         >
-          Transforma tu futuro inmobiliario con 
-          <span className="text-remax-red font-semibold"> innovación</span> y 
-          <span className="text-remax-blue font-semibold"> tecnología</span>.
+          Transforma tu futuro inmobiliario con{" "}
+          <span className="relative inline-block min-w-[160px] h-[1.2em]">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={wordIndex}
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -40, opacity: 0 }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-remax-red font-semibold absolute left-0 top-1"
+              >
+                {words[wordIndex]}.
+              </motion.span>
+            </AnimatePresence>
+          </span>
+        
+        
         </motion.p>
 
         {/* CTA Button premium con efectos avanzados */}
