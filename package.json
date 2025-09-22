@@ -72,7 +72,7 @@
   "scripts": {
     "dev": "npx webpack serve --mode development",
     "start": "npm run dev",
-    "build": "node build.js",
+    "build": "npx webpack --mode production",
     "build:webpack": "npx webpack --mode production",
     "build:node": "node build.js",
     "build:vercel": "npx webpack --mode production --output-path dist",
@@ -100,7 +100,7 @@
     "scope": "/"
   },
   "vercel": {
-    "buildCommand": "npm run build",
+    "buildCommand": "npx webpack --mode production",
     "outputDirectory": "dist",
     "installCommand": "npm install",
     "framework": null
