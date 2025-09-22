@@ -108,11 +108,22 @@ function HeroSection() {
         ))}
       </div>
 
-      {/* GLOBO FLOTANTE - Posición fija sin aparecer/desaparecer */}
-      <div
-        className="absolute top-16 left-1/2 transform -translate-x-1/2"
+      {/* GLOBO FLOTANTE - Aparece junto con el texto descriptivo */}
+      <motion.div
+        className="absolute top-16 w-48 md:w-64 h-48 md:h-64 flex items-center justify-center"
         style={{
-          zIndex: 9999
+          zIndex: 9999,
+ 
+        }}
+        initial={{ opacity: 0, scale: 0.3, y: -50 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ 
+          duration: 1.5, 
+          delay: 1.5,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          type: "spring",
+          stiffness: 80,
+          damping: 15
         }}
       >
         <motion.div
@@ -126,19 +137,18 @@ function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut"
           }}
+          className="w-full h-full flex items-center justify-center"
         >
-          <div className="relative border-2 border-transparent">
-            <img 
-              src={require('../assets/WhatsApp Image 2025-03-31 at 15.50.41.png')} 
-              className="w-48 h-48 md:w-64 md:h-64 items-center place-content-center mx-auto" 
-              alt="RE/MAX NOA Globo"
-              style={{
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))'
-              }}
-            />
-          </div>
+          <img 
+            src={require('../assets/WhatsApp Image 2025-03-31 at 15.50.41.png')} 
+            className="w-full h-full object-contain" 
+            alt="RE/MAX NOA Globo"
+            style={{
+              filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))'
+            }}
+          />
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Contenido principal con parallax - Movido hacia abajo para dar espacio al globo */}
       <motion.div 

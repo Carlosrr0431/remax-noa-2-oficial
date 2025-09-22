@@ -79,25 +79,33 @@ function Header() {
 
   return (
     <motion.header 
-      initial={{ y: -120, opacity: 0 }}
+      initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      transition={{ 
+        duration: 1.2, 
+        ease: [0.4, 0, 0.2, 1],
+        delay: 0.2
+      }}
       style={{ 
         backdropFilter: `blur(${headerBlur}px)`,
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.8)'
+        backgroundColor: 'rgba(255, 255, 255, 0.95)'
       }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-out ${
         scrolled 
           ? 'shadow-2xl border-b border-gray-200/30' 
-          : 'border-b border-white/20'
+          : 'border-b border-white/20 shadow-lg'
       }`}
     >
       {/* Gradiente decorativo superior */}
       <motion.div
         className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-remax-red via-purple-500 to-remax-blue"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ 
+          duration: 1.2, 
+          delay: 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94]
+        }}
       />
 
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">

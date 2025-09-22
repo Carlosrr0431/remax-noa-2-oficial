@@ -17,7 +17,6 @@ function App() {
       <TestimonialsSection />
       <RecruitmentSection />
       <OfficeGallerySection />
-      <ContactForm />
       <Footer />
     </div>
   );
