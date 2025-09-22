@@ -159,7 +159,12 @@ function Footer() {
                   <img 
                     src="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf (10 x 2 in) (1).png" 
                     alt="RE/MAX NOA" 
-                    className="h-12 w-auto drop-shadow-lg" 
+                    className="h-12 w-auto drop-shadow-lg bg-transparent" 
+                    style={{
+                      mixBlendMode: 'multiply',
+                      filter: 'contrast(1.2) saturate(1.1)',
+                      backgroundColor: 'transparent'
+                    }}
                   />
                 </motion.div>
                 <div>

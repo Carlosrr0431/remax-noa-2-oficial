@@ -95,7 +95,39 @@ function HeroSection() {
         ))}
       </div>
 
-      {/* Contenido principal con parallax */}
+      {/* GLOBO FLOTANTE - Posición fija sin aparecer/desaparecer */}
+      <div
+        className="absolute top-16 left-1/2 transform -translate-x-1/2"
+        style={{
+          zIndex: 9999
+        }}
+      >
+        <motion.div
+          animate={{ 
+            x: [-15, 15, -15], // flotación lateral
+            y: [-10, 10, -10], // flotación vertical suave
+            rotate: [-2, 2, -2] // rotación muy sutil
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <div className="relative border-2 border-transparent">
+            <img 
+              src={require('../assets/WhatsApp Image 2025-03-31 at 15.50.41.png')} 
+              className="w-48 h-48 md:w-64 md:h-64 items-center place-content-center mx-auto" 
+              alt="RE/MAX NOA Globo"
+              style={{
+                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))'
+              }}
+            />
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Contenido principal con parallax - Movido hacia abajo para dar espacio al globo */}
       <motion.div 
         style={{ 
           y: yContentParallax, 
@@ -103,85 +135,13 @@ function HeroSection() {
           x: xSpring,
           rotateY: xSpring
         }}
-        className="relative z-30 w-full max-w-6xl mx-auto px-4 text-center"
+        className="relative z-30 w-full max-w-6xl mx-auto px-4 text-center mt-40 md:mt-48"
       >
-        {/* Logo con animaciones premium */}
-        <motion.div
-          initial={{ scale: 0, rotateY: -180, opacity: 0 }}
-          animate={{ scale: 1, rotateY: 0, opacity: 1 }}
-          transition={{ 
-            duration: 1.5, 
-            type: "spring", 
-            stiffness: 80,
-            delay: 0.2
-          }}
-          whileHover={{ 
-            scale: 1.05, 
-            rotateY: 5,
-            transition: { duration: 0.3 }
-          }}
-          className="mb-8"
-        >
-          <img 
-            src="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf (10 x 2 in) (1).png" 
-            alt="RE/MAX NOA" 
-            className="h-16 md:h-24 w-auto mx-auto drop-shadow-2xl filter" 
-          />
-        </motion.div>
+        {/* Espacio adicional para el globo flotante que ahora está posicionado arriba */}
+        <div className="mb-8" />
 
-        {/* Título con efectos cinematográficos */}
-        <div className="mb-8">
-          <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <motion.span
-              initial={{ x: -200, opacity: 0, rotateY: -90 }}
-              animate={{ x: 0, opacity: 1, rotateY: 0 }}
-              transition={{ 
-                duration: 1.2, 
-                delay: 0.7,
-                type: "spring",
-                stiffness: 100
-              }}
-              className="block bg-gradient-to-r from-remax-red via-red-400 to-remax-red bg-clip-text text-transparent mb-2"
-              whileHover={{ 
-                scale: 1.02,
-                textShadow: "0 0 30px rgba(225,29,72,0.5)"
-              }}
-            >
-              RE/MAX NOA
-            </motion.span>
-            
-            <motion.span
-              initial={{ x: 200, opacity: 0, rotateY: 90 }}
-              animate={{ x: 0, opacity: 1, rotateY: 0 }}
-              transition={{ 
-                duration: 1.2, 
-                delay: 1,
-                type: "spring",
-                stiffness: 100
-              }}
-              className="block bg-gradient-to-r from-remax-blue via-blue-400 to-remax-blue bg-clip-text text-transparent"
-              whileHover={{ 
-                scale: 1.02,
-                textShadow: "0 0 30px rgba(37,99,235,0.5)"
-              }}
-            >
-              Alto Impacto
-            </motion.span>
-          </motion.h1>
-          
-          {/* Línea decorativa animada */}
-          <motion.div
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: "200px", opacity: 1 }}
-            transition={{ duration: 1, delay: 1.5 }}
-            className="h-1 bg-gradient-to-r from-remax-red via-white to-remax-blue mx-auto rounded-full mt-6"
-          />
-        </div>
+        {/* Título eliminado a pedido del usuario para destacar solo el globo animado */}
+        <div className="mb-4" />
 
         {/* Subtítulo premium */}
         <motion.p
@@ -244,6 +204,8 @@ function HeroSection() {
             </motion.svg>
             
             <span className="relative z-10">¡Sumate a RE/MAX NOA!</span>
+            {/* Texto CTA simplificado para evitar repetición de marca en exceso */}
+            {/* <span className="relative z-10">¡Sumate al Equipo!</span> */}
             
             {/* Flecha animada */}
             <motion.svg

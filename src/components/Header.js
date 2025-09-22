@@ -116,7 +116,12 @@ function Header() {
             <img 
               src="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf (10 x 2 in) (1).png" 
               alt="RE/MAX NOA" 
-              className="h-12 w-auto drop-shadow-lg" 
+              className="h-12 w-auto drop-shadow-lg bg-transparent" 
+              style={{
+                mixBlendMode: 'multiply',
+                filter: 'contrast(1.2) saturate(1.1)',
+                backgroundColor: 'transparent'
+              }}
             />
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-remax-red/20 to-remax-blue/20 rounded-full blur-lg opacity-0"
