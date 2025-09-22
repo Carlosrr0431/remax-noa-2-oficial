@@ -1,0 +1,100 @@
+{
+  "name": "remax-noa-landing",
+  "version": "1.0.0",
+  "description": "Landing page premium para RE/MAX NOA - Líderes inmobiliarios del Noroeste Argentino",
+  "private": true,
+  "keywords": [
+    "remax",
+    "inmobiliaria",
+    "argentina",
+    "tucuman",
+    "noa",
+    "propiedades",
+    "agentes",
+    "landing-page",
+    "pwa"
+  ],
+  "author": "RE/MAX NOA",
+  "license": "MIT",
+  "homepage": "https://remaxnoa.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/remaxnoa/landing-page.git"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "framer-motion": "^10.16.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "core-js": "^3.32.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.9",
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-transform-runtime": "^7.22.9",
+    "@babel/runtime": "^7.22.9",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.3",
+    "compression-webpack-plugin": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss": "^8.4.24",
+    "postcss-loader": "^8.2.0",
+    "react-refresh": "^0.14.0",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.9",
+    "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.9.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "start": "npm run dev",
+    "build": "webpack --mode production",
+    "build:analyze": "set ANALYZE=true && webpack --mode production",
+    "serve:build": "npx serve -s dist -l 3000",
+    "clean": "if exist dist rmdir /s /q dist",
+    "lint": "echo Linting... && echo No linter configured",
+    "test": "echo Testing... && echo No tests configured",
+    "optimize": "npm run clean && npm run build",
+    "deploy": "npm run optimize && echo Ready for deployment",
+    "audit:security": "npm audit --audit-level moderate",
+    "audit:performance": "echo Performance audit - Use Lighthouse or similar tools",
+    "preinstall": "node --version && npm --version",
+    "postinstall": "echo Installation complete - Run npm start to begin development",
+    "prebuild": "npm run clean",
+    "postbuild": "echo Build complete - Files ready in /dist folder"
+  },
+  "pwa": {
+    "name": "RE/MAX NOA",
+    "short_name": "RE/MAX NOA",
+    "description": "Líder inmobiliario del Noroeste Argentino",
+    "theme_color": "#E11D48",
+    "background_color": "#FFFFFF",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/"
+  }
+}
