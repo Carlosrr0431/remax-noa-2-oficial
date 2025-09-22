@@ -98,5 +98,11 @@
     "display": "standalone",
     "start_url": "/",
     "scope": "/"
+  },
+  "vercel": {
+    "buildCommand": "npm run build",
+    "outputDirectory": "dist",
+    "installCommand": "npm install",
+    "framework": null
   }
 }

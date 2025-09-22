@@ -1,0 +1,12 @@
+node_modules
+src
+public
+.git
+.gitignore
+*.md
+webpack.config.js
+build.js
+postcss.config.js
+tailwind.config.js
+.babelrc
+package-lock.json
