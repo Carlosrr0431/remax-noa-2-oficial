@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
 
 function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [wordIndex, setWordIndex] = useState(0);
+  const [posterData, setPosterData] = useState(null);
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef = useRef(null);
   const { scrollY } = useScroll();
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
@@ -46,21 +49,60 @@ function HeroSection() {
     return () => clearInterval(interval);
   }, [words.length, prefersReducedMotion]);
 
+  // Capturar primer frame del video para usarlo como poster (mejor experiencia de carga / compartir)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handleLoadedData = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth || 1280;
+        canvas.height = video.videoHeight || 720;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        setPosterData(dataUrl);
+      } catch (e) {
+        console.warn('No se pudo generar poster dinámico:', e);
+      }
+    };
+    const handleCanPlay = () => setVideoReady(true);
+    video.addEventListener('loadeddata', handleLoadedData, { once: true });
+    video.addEventListener('canplay', handleCanPlay, { once: true });
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('canplay', handleCanPlay);
+    };
+  }, [prefersReducedMotion]);
+
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32 pb-16"
       id="hero"
     >
 
-      {/* Video de fondo con parallax */}
+      {/* Poster estático (primer frame) detrás mientras el video prepara */}
+      {posterData && (
+        <img
+          src={posterData}
+          alt="Primer frame video RE/MAX NOA"
+          aria-hidden="true"
+          className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700 ${videoReady ? 'opacity-0' : 'opacity-100'}`}
+          style={{ zIndex: 1 }}
+        />
+      )}
+      {/* Video de fondo con parallax (se muestra cuando está listo) */}
       <motion.video
-        style={{ y: yVideoParallax }}
-        className="absolute inset-0 w-full h-full object-cover scale-105"
+        ref={videoRef}
+        style={{ y: yVideoParallax, zIndex: 2 }}
+        className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700 ${videoReady ? 'opacity-100' : 'opacity-0'}`}
         autoPlay={!prefersReducedMotion}
         loop={!prefersReducedMotion}
         muted
         playsInline
-        poster={require('../assets/premiados.jpg')}
+        preload="auto"
+        poster={posterData || undefined}
       >
         <source src={require('../assets/video 1920x1080_convención 2024 (1).mp4')} type="video/mp4" />
         {/* Fallback simple */}
