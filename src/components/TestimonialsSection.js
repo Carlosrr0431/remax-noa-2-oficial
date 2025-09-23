@@ -4,27 +4,19 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 const videoTestimonials = [
   {
     id: 1,
-    name: "Emiliano García",
-    role: "Agente Senior",
+    name: "Agustina",
     video: require('../assets/videoEmiliano.MOV'),
-    description: "RE/MAX NOA cambió mi vida profesional completamente.",
-    years: "4 años"
   },
   {
     id: 2,
-    name: "Agustina Rodríguez",
-    role: "Top Producer",
+    name: "Emiliano",
     video: require('../assets/VideoAgustina.MOV'), 
-    description: "Encontré en RE/MAX NOA no solo una carrera, sino una familia.",
-    years: "3 años"
+
   },
   {
     id: 3,
-    name: "Equipo RE/MAX NOA",
-    role: "Unidos por el éxito",
+    name: "Cecilia",
     video: require('../assets/IMG_4782.MOV'),
-    description: "La fuerza radica en la colaboración y el compromiso compartido.",
-    years: "Juntos"
   }
 ];
 
@@ -107,7 +99,6 @@ function TestimonialsSection() {
                     <video
                       ref={el => videoRefs.current[index] = el}
                       className="w-full h-64 object-cover"
-                      poster={require('../assets/0122-DSC08806+B.jpg')}
                       controls
                       preload="metadata"
                       playsInline
@@ -133,21 +124,14 @@ function TestimonialsSection() {
                   </>
                 )}
 
-                <div className="absolute top-4 right-4 bg-gradient-to-r from-remax-red to-remax-blue text-white px-3 py-1 rounded-full text-sm font-bold">
-                  {testimonial.years}
-                </div>
+         
               </div>
 
               <div className="relative z-10 text-center">
                 <h3 className="font-bold text-xl text-white mb-2">
                   {testimonial.name}
                 </h3>
-                <p className="text-remax-blue font-semibold mb-3">
-                  {testimonial.role}
-                </p>
-                <p className="text-gray-300 text-sm leading-relaxed italic">
-                  "{testimonial.description}"
-                </p>
+          
               </div>
 
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-remax-red via-purple-500 to-remax-blue" />

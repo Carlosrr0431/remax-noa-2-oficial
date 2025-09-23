@@ -38,8 +38,8 @@ function Header() {
   const [activeSection, setActiveSection] = useState('');
   
   const { scrollY } = useScroll();
-  const headerOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
-  const headerBlur = useTransform(scrollY, [0, 100], [8, 20]);
+  const headerOpacity = useTransform(scrollY, [0, 150], [0.85, 0.97]);
+  const headerBlur = useTransform(scrollY, [0, 150], [6, 18]);
   const logoScale = useTransform(scrollY, [0, 100], [1, 0.9]);
 
   useEffect(() => {
@@ -88,7 +88,8 @@ function Header() {
       }}
       style={{ 
         backdropFilter: `blur(${headerBlur}px)`,
-        backgroundColor: 'rgba(255, 255, 255, 0.95)'
+        background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%)',
+        WebkitBackdropFilter: `blur(${headerBlur}px)`
       }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-out ${
         scrolled 
@@ -109,29 +110,27 @@ function Header() {
       />
 
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-4">
-        {/* Logo premium */}
+        {/* Logo / Marca */}
         <motion.div 
-          className="flex items-center gap-4"
+          className="flex items-center gap-3"
           whileHover={{ scale: 1.03 }}
-          transition={{ type: "spring", stiffness: 300 }}
+          transition={{ type: 'spring', stiffness: 300 }}
           style={{ scale: logoScale }}
         >
-         
-          
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.8, duration: 0.6 }}
-            className="hidden sm:block"
+            transition={{ delay: 0.5, duration: 0.5 }}
+            className="flex flex-col"
           >
-            <div className="font-black text-2xl tracking-tight bg-gradient-to-r from-remax-red via-gray-800 to-remax-blue bg-clip-text text-transparent">
+            <div className="font-black text-lg xs:text-xl sm:text-2xl leading-none tracking-tight bg-gradient-to-r from-remax-red via-gray-800 to-remax-blue bg-clip-text text-transparent">
               RE/MAX NOA
             </div>
             <motion.div 
-              className="text-xs text-gray-500 font-medium tracking-wider uppercase"
+              className="text-[10px] xs:text-[11px] sm:text-xs text-gray-600 font-semibold tracking-widest uppercase mt-0.5"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 1.2 }}
+              transition={{ delay: 0.9 }}
             >
               Alto Impacto
             </motion.div>
@@ -216,7 +215,7 @@ function Header() {
 
         {/* Mobile menu button premium */}
         <motion.button
-          className="md:hidden relative w-12 h-12 rounded-2xl bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:bg-white/90 flex items-center justify-center shadow-lg"
+          className="md:hidden relative w-11 h-11 rounded-2xl bg-white/70 backdrop-blur-md border border-gray-200/50 hover:bg-white/90 flex items-center justify-center shadow-lg"
           aria-label="Abrir menú"
           onClick={() => setMenuOpen(!menuOpen)}
           whileHover={{ scale: 1.05, rotate: 5 }}

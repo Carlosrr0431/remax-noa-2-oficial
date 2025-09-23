@@ -1,59 +1,69 @@
 import React, { useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
+// Datos construidos desde los 4 links provistos (resumen sintetizado)
+// Si luego se obtienen imágenes oficiales de cada ficha, reemplazar las actuales.
 const properties = [
   {
     id: 1,
-    title: "Casa moderna en Yerba Buena",
-    price: 250000,
-    originalPrice: 280000,
-    img: require('../assets/0122-DSC08806+B.jpg'),
-    desc: "Espectacular casa moderna con diseño contemporáneo, pileta climatizada y vista panorámica.",
-    specs: { bedrooms: 4, bathrooms: 3, area: 280, garage: 2 },
-    badge: "Destacada",
+    title: "Casa 3 Dormitorios Vertientes Eco Pueblo",
+    url: "https://www.remax.com.ar/listings/casa-3-dormitorios-venta-vertientes-eco-pueblo",
+    price: 160000,
+    originalPrice: 160000,
+  img: require("../assets/CASA 3 DORMITORIOS VENTA VERTIENTES ECO PUEBLO.webp"),
+    desc: "Casa en barrio cerrado Vertientes Eco Pueblo (Vaqueros). Terreno 1.160 m², 238 m² totales aprox. Hall, living, cocina comedor, 2 dorm + 1 dorm en suite con jacuzzi, quincho, lavadero, balcón y amenities del barrio.",
+    specs: { bedrooms: 3, bathrooms: 2, area: 238, garage: 1 },
+    badge: "Barrio Privado",
     badgeType: "featured",
-    location: "Yerba Buena, Tucumán",
-    type: "Casa"
+    location: "Vertientes Eco Pueblo, Vaqueros - Salta",
+    type: "Casa",
+    ogImage: null // Reemplazar por URL og:image cuando se obtenga
   },
   {
     id: 2,
-    title: "Departamento en Barrio Norte",
-    price: 120000,
-    originalPrice: 135000,
-    img: require('../assets/0220 - _F6_1138 B (1) (1).jpg'),
-    desc: "Departamento premium con amenities completos, balcón con vista y ubicación privilegiada.",
-    specs: { bedrooms: 2, bathrooms: 2, area: 85, garage: 1 },
-    badge: "Nuevo",
-    badgeType: "new",
-    location: "Barrio Norte, Tucumán",
-    type: "Departamento"
+    title: "Casa 4 Dorm Villa San Lorenzo 5000 m²",
+    url: "https://www.remax.com.ar/listings/casa-4-dorm-venta-san-lorenzo-terreno-5000-m2",
+    price: 750000,
+    originalPrice: 750000,
+  img: require("../assets/CASA 4 DORM VENTA SAN LORENZO TERRENO 5000 M2.webp"),
+    desc: "Residencia en entorno natural exclusivo en Villa San Lorenzo. Terreno 5.000 m², 336 m² construidos. Living amplio, cocina comedor, sala TV, 3 dorm (1 en suite) en PB y master suite en PA. Pileta, deck, calefacción central y área de servicio.",
+    specs: { bedrooms: 4, bathrooms: 4, area: 336, garage: 2 },
+    badge: "Premium",
+    badgeType: "premium",
+    location: "Villa San Lorenzo - Salta",
+    type: "Casa",
+    ogImage: null
   },
   {
     id: 3,
-    title: "Terreno en Tafí Viejo",
-    price: 60000,
-    originalPrice: 70000,
-    img: require('../assets/0549 - MAR_6717 B.jpg'),
-    desc: "Terreno ideal para inversión con excelente potencial de crecimiento y ubicación estratégica.",
-    specs: { area: 500, frontage: 20, depth: 25 },
-    badge: "Inversión",
+    title: "Casa + 3 Monoambientes Macrocentro",
+    url: "https://www.remax.com.ar/listings/casa-3-dorm-3-monoambientes-venta-macrocentro",
+    price: 250000,
+    originalPrice: 250000,
+  img: require("../assets/CASA 3 DORM + 3 MONOAMBIENTES VENTA MACROCENTRO.webp"),
+    desc: "Propiedad mixta: vivienda (3 dorm, 2 baños, toilette, living, cocina-comedor, patio, terraza) + 3 monoambientes con ingresos independientes. 298 m² totales, 232 m² cubiertos. Ideal renta y vivienda simultánea.",
+    specs: { bedrooms: 6, bathrooms: 5, area: 298, garage: 1 },
+    badge: "Renta",
     badgeType: "investment",
-    location: "Tafí Viejo, Tucumán",
-    type: "Terreno"
+    location: "Macrocentro - Salta",
+    type: "Casa / Inversión",
+    ogImage: null
   },
   {
     id: 4,
-    title: "Casa quinta en San Javier",
-    price: 320000,
-    originalPrice: 350000,
-    img: require('../assets/WhatsApp Image 2025-03-31 at 15.50.41.png'),
-    desc: "Casa quinta de lujo con vista panorámica a las montañas, quincho y entorno natural único.",
-    specs: { bedrooms: 5, bathrooms: 4, area: 380, garage: 3 },
-    badge: "Premium",
-    badgeType: "premium",
-    location: "San Javier, Tucumán",
-    type: "Casa Quinta"
-  },
+    title: "Casa 4 Dorm Grand Bourg con Pileta",
+    url: "https://www.remax.com.ar/listings/casa-4-dormitorios-venta-b-grand-bourg-con-pileta",
+    price: 275000,
+    originalPrice: 275000,
+  img: require("../assets/CASA 4 DORMITORIOS VENTA B° GRAND BOURG CON PILETA.webp"),
+    desc: "Casa en Grand Bourg. 415 m² totales (170 m² cubiertos). 2 plantas: living parquet, cocina comedor, quincho, jardín con pileta, 4 dorm (2 en suite con vestidor), lavadero, altillo, cochera doble y buena distribución de espacios.",
+    specs: { bedrooms: 4, bathrooms: 2, area: 415, garage: 2 },
+    badge: "Ubicación",
+    badgeType: "new",
+    location: "B° Grand Bourg - Salta",
+    type: "Casa",
+    ogImage: null
+  }
 ];
 
 const badgeStyles = {
@@ -120,6 +130,11 @@ function FeaturedPropertiesSection() {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(price);
+  };
+
+  const truncate = (text, max = 190) => {
+    if (!text) return '';
+    return text.length > max ? text.slice(0, max).trim() + '…' : text;
   };
 
   return (
@@ -266,16 +281,18 @@ function FeaturedPropertiesSection() {
               </motion.div>
 
               {/* Imagen con efectos premium */}
-              <div className="relative overflow-hidden rounded-t-3xl">
+              <div className="relative overflow-hidden rounded-t-3xl cursor-pointer" onClick={() => window.open(property.url, '_blank', 'noopener') }>
                 <motion.img 
-                  src={property.img} 
+                  src={property.ogImage || property.img} 
                   alt={property.title} 
                   className="w-full h-64 object-cover transition-all duration-700"
                   whileHover={{ 
                     scale: 1.15,
-                    filter: "brightness(1.1) contrast(1.1)"
+                    filter: "brightness(1.08) contrast(1.08)"
                   }}
                   transition={{ duration: 0.8 }}
+                  loading="lazy"
+                  decoding="async"
                 />
                 
                 {/* Overlay con gradiente premium */}
@@ -340,9 +357,22 @@ function FeaturedPropertiesSection() {
                   </p>
                 </motion.div>
                 
-                <p className="text-gray-600 mb-6 leading-relaxed text-sm">
-                  {property.desc}
+                <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                  {truncate(property.desc)}
                 </p>
+                <div className="mb-6 -mt-2">
+                  <a
+                    href={property.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-remax-blue hover:text-remax-red transition-colors group"
+                  >
+                    Ver ficha completa
+                    <svg className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                </div>
                 
                 {/* Especificaciones */}
                 <div className="flex flex-wrap gap-3 mb-6">
@@ -396,8 +426,11 @@ function FeaturedPropertiesSection() {
                 
                 {/* Botones de acción */}
                 <div className="flex gap-3">
-                  <motion.button
-                    className="flex-1 bg-gradient-to-r from-remax-red to-remax-blue text-white py-3 px-4 rounded-xl font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg"
+                  <motion.a
+                    href={property.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 bg-gradient-to-r from-remax-red to-remax-blue text-white py-3 px-4 rounded-xl font-semibold text-sm opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg text-center"
                     whileHover={{ 
                       scale: 1.02,
                       boxShadow: "0 8px 30px rgba(225,29,72,0.3)"
@@ -405,7 +438,7 @@ function FeaturedPropertiesSection() {
                     whileTap={{ scale: 0.98 }}
                   >
                     Ver detalles
-                  </motion.button>
+                  </motion.a>
                   
                   <motion.button
                     className="w-12 h-12 bg-white border-2 border-gray-200 rounded-xl flex items-center justify-center text-gray-600 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:border-remax-blue hover:text-remax-blue"

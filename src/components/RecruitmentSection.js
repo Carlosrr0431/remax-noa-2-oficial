@@ -5,7 +5,7 @@ const benefits = [
   {
     id: 1,
     title: "Cultura colaborativa",
-    desc: "Forma parte de un equipo unido donde el éxito individual impulsa el crecimiento colectivo, con mentorías personalizadas y networking constante.",
+    desc: "Forma parte de un equipo unido donde el éxito individual impulsa el crecimiento colectivo.",
     icon: "🤝",
     iconSvg: (
       <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -13,13 +13,12 @@ const benefits = [
       </svg>
     ),
     gradient: "from-blue-500 via-indigo-500 to-purple-600",
-    stats: "98% satisfacción",
     feature: "Mentorías 1:1"
   },
   {
     id: 2,
     title: "Tecnología de vanguardia",
-    desc: "Acceso exclusivo a herramientas de última generación, CRM avanzado, marketing digital automatizado y plataformas de análisis de mercado.",
+    desc: "Acceso exclusivo a herramientas de última generación.",
     icon: "💻",
     iconSvg: (
       <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,13 +26,12 @@ const benefits = [
       </svg>
     ),
     gradient: "from-emerald-500 via-teal-500 to-cyan-600",
-    stats: "50+ herramientas",
     feature: "IA Integrada"
   },
   {
     id: 3,
-    title: "Capacitación premium",
-    desc: "Programa de formación continua con certificaciones internacionales, workshops exclusivos y acceso a los mejores coaches inmobiliarios.",
+    title: "Capacitación continua",
+    desc: "Programa de formación continua con talleres y webinars.",
     icon: "🎓",
     iconSvg: (
       <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,29 +41,13 @@ const benefits = [
       </svg>
     ),
     gradient: "from-purple-500 via-pink-500 to-rose-600",
-    stats: "200+ cursos",
-    feature: "Certificaciones"
-  },
-  {
-    id: 4,
-    title: "Ingresos excepcionales",
-    desc: "Plan de comisiones líder en el mercado, bonos por performance, incentivos trimestrales y oportunidades de crecimiento económico ilimitado.",
-    icon: "💰",
-    iconSvg: (
-      <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    gradient: "from-amber-500 via-orange-500 to-red-600",
-    stats: "300% más ingresos",
-    feature: "Bonos trimestrales"
-  },
+    feature: "Formación gratuita"
+  }
 ];
 
 const achievements = [
-  { number: "15+", label: "Años liderando", icon: "🏆" },
-  { number: "950+", label: "Ventas exitosas", icon: "🎯" },
-  { number: "100+", label: "Agentes top", icon: "⭐" },
+  { number: "17+", label: "Años liderando", icon: "🏆" },
+  { number: "600+", label: "Propiedades", icon: "🏡" },
   { number: "#1", label: "En el NOA", icon: "👑" }
 ];
 
@@ -130,7 +112,7 @@ function RecruitmentSection() {
   }, []);
 
   return (
-    <section id="reclutamiento" className="relative py-40 bg-gradient-to-br from-slate-50 via-white to-indigo-50 overflow-hidden">
+  <section id="reclutamiento" className="relative py-24 sm:py-32 lg:py-40 bg-gradient-to-br from-slate-50 via-white to-indigo-50 overflow-hidden">
       {/* Fondos animados premium */}
       <motion.div
         style={{ y: y1, opacity }}
@@ -158,7 +140,7 @@ function RecruitmentSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2 }}
-          className="text-center mb-32"
+          className="text-center mb-20 sm:mb-24 lg:mb-28"
         >
           <motion.div
             initial={{ scale: 0, rotate: -10 }}
@@ -181,7 +163,7 @@ function RecruitmentSection() {
           </motion.div>
 
           <motion.h2
-            className="text-6xl md:text-8xl font-black mb-8 leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 sm:mb-8 leading-tight tracking-tight"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -197,7 +179,7 @@ function RecruitmentSection() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg sm:text-xl text-gray-600 max-w-3xl sm:max-w-4xl mx-auto leading-relaxed px-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -213,7 +195,7 @@ function RecruitmentSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 max-w-4xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12 sm:mt-16 max-w-5xl mx-auto"
           >
             {achievements.map((achievement, index) => (
               <motion.div
@@ -234,7 +216,7 @@ function RecruitmentSection() {
                 >
                   {achievement.icon}
                 </motion.div>
-                <div className="text-3xl font-black bg-gradient-to-r from-remax-red to-remax-blue bg-clip-text text-transparent">
+                <div className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-remax-red to-remax-blue bg-clip-text text-transparent">
                   {achievement.number}
                 </div>
                 <div className="text-sm text-gray-600 font-semibold uppercase tracking-wide">
@@ -251,7 +233,7 @@ function RecruitmentSection() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5, type: "spring" }}
-          className="mb-32 relative"
+          className="mb-24 sm:mb-28 lg:mb-32 relative"
         >
           <div className="relative max-w-5xl mx-auto">
             <motion.div
@@ -321,7 +303,7 @@ function RecruitmentSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16 lg:mb-20 max-w-6xl mx-auto"
         >
           {benefits.map((benefit, i) => (
             <motion.div
@@ -336,7 +318,7 @@ function RecruitmentSection() {
                 rotateX: 2,
                 transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
-              className="group relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-2xl p-8 overflow-hidden transition-all duration-500"
+              className="group relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden transition-all duration-500"
               style={{
                 background: `linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%)`,
                 backdropFilter: 'blur(20px)',
@@ -389,26 +371,17 @@ function RecruitmentSection() {
                   </motion.div>
                 </motion.div>
 
-                {/* Stats badge */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 + 0.5 }}
-                  className="inline-block bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-xs font-bold mb-4"
-                >
-                  {benefit.stats}
-                </motion.div>
+      
 
                 <motion.h3 
-                  className="font-black text-2xl mb-4 text-gray-800"
+                  className="font-black text-xl sm:text-2xl mb-3 sm:mb-4 text-gray-800"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   {benefit.title}
                 </motion.h3>
                 
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                <p className="text-gray-600 text-sm leading-relaxed mb-5 sm:mb-6">
                   {benefit.desc}
                 </p>
 
@@ -447,7 +420,7 @@ function RecruitmentSection() {
             whileTap={{ scale: 0.95 }}
           >
             <motion.button
-              className="group relative bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue text-white px-16 py-6 rounded-full font-black text-2xl shadow-2xl overflow-hidden transition-all duration-500"
+              className="group relative bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue text-white px-8 sm:px-12 lg:px-16 py-4 sm:py-5 rounded-full font-black text-lg sm:text-xl lg:text-2xl shadow-2xl overflow-hidden transition-all duration-500"
               whileHover={{
                 boxShadow: "0 25px 50px rgba(225,29,72,0.4), 0 0 0 1px rgba(255,255,255,0.1)"
               }}
@@ -465,7 +438,7 @@ function RecruitmentSection() {
                 }}
               />
               
-              <span className="relative z-10 flex items-center gap-4">
+              <span className="relative z-10 flex items-center gap-3 sm:gap-4">
                 <motion.span
                   animate={{ rotate: [0, 360] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -474,7 +447,7 @@ function RecruitmentSection() {
                 </motion.span>
                 ¡Inicia tu carrera HOY!
                 <motion.svg
-                  className="w-8 h-8 group-hover:translate-x-3 transition-transform duration-300"
+                  className="w-5 h-5 sm:w-7 sm:h-7 lg:w-8 lg:h-8 group-hover:translate-x-3 transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -493,32 +466,13 @@ function RecruitmentSection() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Más de <span className="text-remax-red font-bold">100 agentes</span> ya han cambiado sus vidas con nosotros.
+            
+            Más de <span className="text-remax-red font-bold">50 agentes</span> ya forman parte de nuestro equipo y están construyendo su futuro con nosotros. Vos también podes hacerlo.
             <br />
             <span className="text-remax-blue font-bold">Tu momento es ahora.</span>
           </motion.p>
 
-          {/* Testimonial rápido */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="mt-12 bg-white/50 backdrop-blur-sm border border-white/30 rounded-2xl p-6 max-w-2xl mx-auto"
-          >
-            <p className="text-gray-700 italic text-lg mb-4">
-              "Desde que llegué a RE/MAX NOA, mis ingresos se triplicaron y encontré una familia profesional increíble"
-            </p>
-            <div className="flex items-center justify-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-r from-remax-red to-remax-blue rounded-full flex items-center justify-center text-white font-bold">
-                AG
-              </div>
-              <div className="text-left">
-                <div className="font-bold text-gray-800">Agente Exitoso</div>
-                <div className="text-sm text-gray-600">3 años en RE/MAX NOA</div>
-              </div>
-            </div>
-          </motion.div>
+     
         </motion.div>
       </div>
     </section>

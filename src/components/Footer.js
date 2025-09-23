@@ -60,8 +60,8 @@ const contactInfo = [
       </svg>
     ),
     label: "Dirección",
-    value: "San Miguel de Tucumán, Argentina",
-    link: "https://maps.google.com"
+  value: "Salta Capital, Argentina",
+  link: "https://maps.google.com/?q=Salta+Capital+Argentina"
   },
   {
     icon: (
@@ -80,8 +80,8 @@ const contactInfo = [
       </svg>
     ),
     label: "Email",
-    value: "info@remaxnoa.com",
-    link: "mailto:info@remaxnoa.com"
+  value: "info@remax-noa.com.ar",
+  link: "mailto:info@remax-noa.com.ar"
   }
 ];
 

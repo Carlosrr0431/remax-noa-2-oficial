@@ -5,14 +5,15 @@ function HeroSection() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [wordIndex, setWordIndex] = useState(0);
   const { scrollY } = useScroll();
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
   // Palabras para la animación de texto dinámico
   const words = ["innovación", "tecnología", "excelencia", "compromiso", "resultados", "confianza"];
   
   // Parallax effects
-  const yVideoParallax = useTransform(scrollY, [0, 1000], [0, -200]);
-  const yContentParallax = useTransform(scrollY, [0, 1000], [0, -100]);
-  const opacityParallax = useTransform(scrollY, [0, 400], [1, 0]);
+  const yVideoParallax = prefersReducedMotion ? 0 : useTransform(scrollY, [0, 1000], [0, -200]);
+  const yContentParallax = prefersReducedMotion ? 0 : useTransform(scrollY, [0, 1000], [0, -100]);
+  const opacityParallax = prefersReducedMotion ? 1 : useTransform(scrollY, [0, 400], [1, 0]);
   
   // Smooth spring animations
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
@@ -38,16 +39,16 @@ function HeroSection() {
 
   // Effect para la animación de texto dinámico
   useEffect(() => {
+    if (prefersReducedMotion) return; // no animar rotación de palabras
     const interval = setInterval(() => {
       setWordIndex((prevIndex) => (prevIndex + 1) % words.length);
-    }, 3000); // Cambia cada 3 segundos
-
+    }, 3000);
     return () => clearInterval(interval);
-  }, [words.length]);
+  }, [words.length, prefersReducedMotion]);
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32 pb-16"
       id="hero"
     >
 
@@ -55,13 +56,15 @@ function HeroSection() {
       <motion.video
         style={{ y: yVideoParallax }}
         className="absolute inset-0 w-full h-full object-cover scale-105"
-        src={require('../assets/video 1920x1080_convención 2024 (1).mp4')}
-        autoPlay
-        loop
+        autoPlay={!prefersReducedMotion}
+        loop={!prefersReducedMotion}
         muted
         playsInline
-        poster={require('../assets/0122-DSC08806+B.jpg')}
-      />
+        poster={require('../assets/premiados.jpg')}
+      >
+        <source src={require('../assets/video 1920x1080_convención 2024 (1).mp4')} type="video/mp4" />
+        {/* Fallback simple */}
+      </motion.video>
       
       {/* Overlay dinámico con gradiente animado */}
       <motion.div 
@@ -79,7 +82,7 @@ function HeroSection() {
 
       {/* Partículas flotantes premium */}
       <div className="absolute inset-0 z-20">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(prefersReducedMotion ? 4 : 12)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute"
@@ -88,13 +91,13 @@ function HeroSection() {
               y: Math.random() * window.innerHeight,
               scale: 0
             }}
-            animate={{
+            animate={prefersReducedMotion ? { opacity: [0, 0.4, 0] } : {
               y: [null, -30, 0, -20, 0],
               x: [null, Math.random() * 50 - 25, null],
               scale: [0, 1, 0.8, 1, 0.6],
               opacity: [0, 0.6, 1, 0.4, 0],
             }}
-            transition={{
+            transition={prefersReducedMotion ? { duration: 6, repeat: Infinity } : {
               duration: Math.random() * 8 + 6,
               repeat: Infinity,
               ease: "easeInOut",
@@ -110,7 +113,7 @@ function HeroSection() {
 
       {/* GLOBO FLOTANTE - Aparece junto con el texto descriptivo */}
       <motion.div
-        className="absolute top-16 w-48 md:w-64 h-48 md:h-64 flex items-center justify-center"
+        className="absolute top-10 w-52 md:w-60 h-52 md:h-60 hidden md:flex items-center justify-center"
         style={{
           zIndex: 9999,
  
@@ -158,10 +161,32 @@ function HeroSection() {
           x: xSpring,
           rotateY: xSpring
         }}
-        className="relative z-30 w-full max-w-6xl mx-auto px-4 text-center mt-40 md:mt-48"
+  className="relative z-30 w-full max-w-5xl mx-auto px-4 text-center md:mt-40 lg:mt-48"
       >
-        {/* Espacio adicional para el globo flotante que ahora está posicionado arriba */}
-        <div className="mb-8" />
+        {/* Globo móvil (separado para evitar solapamiento) */}
+        <div className="flex md:hidden items-center justify-center mb-6">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.4, type: 'spring', stiffness: 90 }}
+            className="w-40 h-40"
+          >
+            <motion.div
+              animate={{
+                y: [0, -14, 0, -10, 0],
+                rotate: [0, 2, -2, 1.5, 0]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-full h-full flex items-center justify-center"
+            >
+              <img
+                src={require('../assets/WhatsApp Image 2025-03-31 at 15.50.41.png')}
+                alt="RE/MAX NOA Globo"
+                className="w-full h-full object-contain drop-shadow-2xl"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
 
         {/* Título eliminado a pedido del usuario para destacar solo el globo animado */}
         <div className="mb-4" />
@@ -172,28 +197,28 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.2, delay: 1.8 }}
           whileHover={{ scale: 1.02 }}
-          className="text-xl md:text-2xl text-white/95 mb-12 max-w-3xl mx-auto leading-relaxed font-light backdrop-blur-sm bg-white/5 px-6 py-4 rounded-3xl border border-white/10 shadow-2xl"
+          className="text-lg sm:text-xl md:text-2xl text-white/95 mb-10 sm:mb-12 max-w-xl sm:max-w-2xl mx-auto font-light backdrop-blur-sm bg-black/30 md:bg-white/5 px-6 py-5 rounded-3xl border border-white/10 shadow-2xl leading-snug"
         >
-          Transforma tu futuro inmobiliario con{" "}
-          <span className="relative inline-block min-w-[160px] h-[1.2em]">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={wordIndex}
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -40, opacity: 0 }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="text-remax-red font-semibold absolute left-0 top-1"
-              >
-                {words[wordIndex]}.
-              </motion.span>
-            </AnimatePresence>
+          <span className="block text-center">Transforma tu futuro inmobiliario</span>
+          <span className="block text-center mt-1">
+            <span className="inline-flex items-baseline justify-center gap-1.5">
+              <span>con</span>
+              <span className="relative inline-block h-[1.3em] overflow-hidden min-w-[7ch]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={wordIndex}
+                    initial={{ y: 30, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -30, opacity: 0 }}
+                    transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-remax-red font-semibold"
+                  >
+                    {words[wordIndex]}.
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </span>
           </span>
-        
-        
         </motion.p>
 
         {/* CTA Button premium con efectos avanzados */}
@@ -216,7 +241,7 @@ function HeroSection() {
               boxShadow: "0 20px 40px rgba(225,29,72,0.4), 0 0 0 1px rgba(255,255,255,0.1)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-remax-red via-red-500 to-remax-blue text-white px-12 py-5 rounded-full font-bold text-xl shadow-2xl transition-all duration-500 overflow-hidden"
+            className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-remax-red via-red-500 to-remax-blue text-white px-8 sm:px-10 md:px-12 py-4 md:py-5 rounded-full font-bold text-lg md:text-xl shadow-2xl transition-all duration-500 overflow-hidden"
           >
             {/* Efecto de brillo deslizante */}
             <motion.div
@@ -277,28 +302,28 @@ function HeroSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.8, duration: 1 }}
-            className="flex justify-center gap-8 mt-8 text-white/80 text-sm"
+            transition={{ delay: 2.6, duration: 1 }}
+            className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8 text-white/80 text-xs sm:text-sm"
           >
             <motion.div 
-              className="text-center"
+              className="text-center min-w-[90px]"
               whileHover={{ scale: 1.1, color: "#E11D48" }}
             >
-              <div className="font-bold text-2xl">100+</div>
+              <div className="font-bold text-xl sm:text-2xl">50+</div>
               <div>Agentes exitosos</div>
             </motion.div>
             <motion.div 
-              className="text-center"
+              className="text-center min-w-[90px]"
               whileHover={{ scale: 1.1, color: "#2563EB" }}
             >
-              <div className="font-bold text-2xl">15+</div>
+              <div className="font-bold text-xl sm:text-2xl">17+</div>
               <div>Años de experiencia</div>
             </motion.div>
             <motion.div 
-              className="text-center"
+              className="text-center min-w-[90px]"
               whileHover={{ scale: 1.1, color: "#ffffff" }}
             >
-              <div className="font-bold text-2xl">#1</div>
+              <div className="font-bold text-xl sm:text-2xl">#1</div>
               <div>En el NOA</div>
             </motion.div>
           </motion.div>

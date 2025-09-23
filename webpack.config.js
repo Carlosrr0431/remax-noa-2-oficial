@@ -29,11 +29,20 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
+      // Imágenes (usa asset/resource para no depender de heurística y evitar parseo JS)
       {
-        test: /\.(png|jpe?g|gif|mp4|mov|avi|webm|svg)$/i,
-        type: 'asset',
+        test: /\.(png|jpe?g|gif|svg|webp|avif)$/i,
+        type: 'asset/resource',
         generator: {
           filename: 'assets/[name].[hash:8][ext]'
+        }
+      },
+      // Videos / medios pesados
+      {
+        test: /\.(mp4|mov|avi|webm)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/media/[name].[hash:8][ext]'
         }
       }
     ]
@@ -46,7 +55,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
-      favicon: path.resolve(__dirname, 'public/favicon.svg')
+      // Cambiado a .ico porque favicon.svg no existe en /public y causaba error
+      favicon: path.resolve(__dirname, 'public/favicon.ico')
     })
   ],
   
