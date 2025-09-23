@@ -6,7 +6,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 const navItems = [
   { name: "Inicio", href: "#", highlight: true, icon: "home" },
   { name: "Nosotros", href: "#nosotros", icon: "about" },
-  { name: "Únete al equipo", href: "#reclutamiento", cta: true, icon: "team" },
+  { name: "Unite al equipo", href: "#reclutamiento", cta: true, icon: "team" },
   { name: "Propiedades", href: "#propiedades", icon: "building" }
 ];
 

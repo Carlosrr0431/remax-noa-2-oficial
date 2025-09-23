@@ -161,7 +161,7 @@ function TestimonialsSection() {
             </svg>
           </a>
           <p className="text-gray-400 mt-4 text-sm">
-            Únete a más de 50 agentes exitosos en RE/MAX NOA
+            Unite a más de 50 agentes exitosos en RE/MAX NOA
           </p>
         </motion.div>
       </div>

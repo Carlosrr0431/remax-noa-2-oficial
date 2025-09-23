@@ -238,11 +238,11 @@ function FeaturedPropertiesSection() {
             transition={{ duration: 1, delay: 0.4 }}
           >
             <span className="bg-gradient-to-r from-remax-blue via-purple-600 to-remax-red bg-clip-text text-transparent">
-              Encuentra tu
+              Encontrá tu
             </span>
             <br />
             <span className="bg-gradient-to-r from-remax-red via-pink-500 to-orange-500 bg-clip-text text-transparent">
-              hogar ideal
+              casa ideal
             </span>
           </motion.h2>
           
@@ -253,7 +253,7 @@ function FeaturedPropertiesSection() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Descubre nuestra selección premium de propiedades en las mejores ubicaciones del NOA
+            Descubrí nuestra selección premium de propiedades en las mejores ubicaciones de Salta
           </motion.p>
           
           {/* Línea decorativa animada */}
