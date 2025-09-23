@@ -43,7 +43,7 @@ const properties = [
   img: require("../assets/CASA 3 DORM + 3 MONOAMBIENTES VENTA MACROCENTRO.webp"),
     desc: "Casa + 3 monoambientes independientes. 298 m² totales, 232 m² cubiertos. Ideal renta múltiple y vivienda simultánea.",
     specs: { bedrooms: 6, bathrooms: 5, area: 298, garage: 1 },
-    badge: "Renta Múltiple",
+    badge: "Inversión",
     badgeType: "investment",
     location: "Macrocentro - Salta",
     type: "Casa / Inversión",
@@ -538,8 +538,11 @@ function FeaturedPropertiesSection() {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-center mt-20"
         >
-          <motion.button
-            className="group relative bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue text-white px-12 py-5 rounded-full font-bold text-lg shadow-2xl overflow-hidden"
+          <motion.a
+            href="https://www.remax.com.ar/agent/pablo-castaneda"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center justify-center bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue text-white px-12 py-5 rounded-full font-bold text-lg shadow-2xl overflow-hidden"
             whileHover={{ 
               scale: 1.05,
               boxShadow: "0 20px 50px rgba(225,29,72,0.3)"
@@ -574,7 +577,7 @@ function FeaturedPropertiesSection() {
                 ease: "easeInOut"
               }}
             />
-          </motion.button>
+          </motion.a>
         </motion.div>
       </div>
     </section>

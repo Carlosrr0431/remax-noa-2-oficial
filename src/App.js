@@ -14,15 +14,15 @@ function App() {
   return (
     <div className="App">
       <Header />
-  <HeroSection />
-  {/* Sección Nosotros reemplazada por OfficeGallerySection */}
-  <OfficeGallerySection />
-  <RecruitmentSection />
-  <TestimonialsSection />
-  <FeaturedPropertiesSection />
-  <BrokerSection />
-    <Footer />
-    <FloatingWhatsAppButton />
+      <HeroSection />
+      {/* Sección Nosotros reemplazada por OfficeGallerySection */}
+      <OfficeGallerySection />
+      <RecruitmentSection />
+      <TestimonialsSection />
+      <FeaturedPropertiesSection />
+      <BrokerSection />
+      <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }
