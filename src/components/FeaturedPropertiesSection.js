@@ -36,6 +36,21 @@ const properties = [
   },
   {
     id: 3,
+    title: "Casa 4 Dorm Grand Bourg con Pileta",
+    url: "https://www.remax.com.ar/listings/casa-4-dormitorios-venta-b-grand-bourg-con-pileta",
+    price: 275000,
+    originalPrice: 275000,
+  img: require("../assets/CASA 4 DORMITORIOS VENTA B° GRAND BOURG CON PILETA.webp"),
+    desc: "Casa en Grand Bourg. 415 m² totales (170 m² cubiertos), pileta, quincho, 4 dorm (2 en suite), altillo y cochera doble.",
+    specs: { bedrooms: 4, bathrooms: 2, area: 415, garage: 2 },
+    badge: "Ubicación Clave",
+    badgeType: "location",
+    location: "B° Grand Bourg - Salta",
+    type: "Casa",
+    ogImage: null
+  },
+  {
+    id: 4,
     title: "Casa + 3 Monoambientes Macrocentro",
     url: "https://www.remax.com.ar/listings/casa-3-dorm-3-monoambientes-venta-macrocentro",
     price: 250000,
@@ -49,21 +64,6 @@ const properties = [
     type: "Casa / Inversión",
     ogImage: null
   },
-  {
-    id: 4,
-    title: "Casa 4 Dorm Grand Bourg con Pileta",
-    url: "https://www.remax.com.ar/listings/casa-4-dormitorios-venta-b-grand-bourg-con-pileta",
-    price: 275000,
-    originalPrice: 275000,
-  img: require("../assets/CASA 4 DORMITORIOS VENTA B° GRAND BOURG CON PILETA.webp"),
-    desc: "Casa en Grand Bourg. 415 m² totales (170 m² cubiertos), pileta, quincho, 4 dorm (2 en suite), altillo y cochera doble.",
-    specs: { bedrooms: 4, bathrooms: 2, area: 415, garage: 2 },
-    badge: "Ubicación Clave",
-    badgeType: "location",
-    location: "B° Grand Bourg - Salta",
-    type: "Casa",
-    ogImage: null
-  }
 ];
 
 const badgeStyles = {
