@@ -66,19 +66,8 @@ function HeroSection() {
         {/* Fallback simple */}
       </motion.video>
       
-      {/* Overlay dinámico con gradiente animado */}
-      <motion.div 
-        className="absolute inset-0 z-10"
-        style={{
-          background: `
-            radial-gradient(600px circle at ${mousePosition.x}% ${mousePosition.y}%, 
-            rgba(225,29,72,0.1) 0%, 
-            rgba(37,99,235,0.2) 40%, 
-            rgba(0,0,0,0.3) 70%,
-            rgba(0,0,0,0.4) 100%)
-          `
-        }}
-      />
+      {/* Overlay eliminado para quitar capa gris oscura al hacer scroll */}
+      {/* Si se necesita un ligero oscurecimiento solo detrás del texto, usar un wrapper local */}
 
       {/* Partículas flotantes premium */}
       <div className="absolute inset-0 z-20">

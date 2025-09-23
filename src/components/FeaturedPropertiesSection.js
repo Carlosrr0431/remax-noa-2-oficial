@@ -14,7 +14,7 @@ const properties = [
     desc: "Casa en barrio cerrado Vertientes Eco Pueblo (Vaqueros). Terreno 1.160 m², 238 m² totales aprox. Hall, living, cocina comedor, 2 dorm + 1 dorm en suite con jacuzzi, quincho, lavadero, balcón y amenities del barrio.",
     specs: { bedrooms: 3, bathrooms: 2, area: 238, garage: 1 },
     badge: "Barrio Privado",
-    badgeType: "featured",
+    badgeType: "gated",
     location: "Vertientes Eco Pueblo, Vaqueros - Salta",
     type: "Casa",
     ogImage: null // Reemplazar por URL og:image cuando se obtenga
@@ -26,9 +26,9 @@ const properties = [
     price: 750000,
     originalPrice: 750000,
   img: require("../assets/CASA 4 DORM VENTA SAN LORENZO TERRENO 5000 M2.webp"),
-    desc: "Residencia en entorno natural exclusivo en Villa San Lorenzo. Terreno 5.000 m², 336 m² construidos. Living amplio, cocina comedor, sala TV, 3 dorm (1 en suite) en PB y master suite en PA. Pileta, deck, calefacción central y área de servicio.",
+    desc: "Residencia premium en entorno natural. Lote 5.000 m², 336 m² construidos, 4 dorm (1 master suite), sala TV, pileta con deck, calefacción central y área de servicio.",
     specs: { bedrooms: 4, bathrooms: 4, area: 336, garage: 2 },
-    badge: "Premium",
+    badge: "Lote 5000 m²",
     badgeType: "premium",
     location: "Villa San Lorenzo - Salta",
     type: "Casa",
@@ -41,9 +41,9 @@ const properties = [
     price: 250000,
     originalPrice: 250000,
   img: require("../assets/CASA 3 DORM + 3 MONOAMBIENTES VENTA MACROCENTRO.webp"),
-    desc: "Propiedad mixta: vivienda (3 dorm, 2 baños, toilette, living, cocina-comedor, patio, terraza) + 3 monoambientes con ingresos independientes. 298 m² totales, 232 m² cubiertos. Ideal renta y vivienda simultánea.",
+    desc: "Casa + 3 monoambientes independientes. 298 m² totales, 232 m² cubiertos. Ideal renta múltiple y vivienda simultánea.",
     specs: { bedrooms: 6, bathrooms: 5, area: 298, garage: 1 },
-    badge: "Renta",
+    badge: "Renta Múltiple",
     badgeType: "investment",
     location: "Macrocentro - Salta",
     type: "Casa / Inversión",
@@ -56,10 +56,10 @@ const properties = [
     price: 275000,
     originalPrice: 275000,
   img: require("../assets/CASA 4 DORMITORIOS VENTA B° GRAND BOURG CON PILETA.webp"),
-    desc: "Casa en Grand Bourg. 415 m² totales (170 m² cubiertos). 2 plantas: living parquet, cocina comedor, quincho, jardín con pileta, 4 dorm (2 en suite con vestidor), lavadero, altillo, cochera doble y buena distribución de espacios.",
+    desc: "Casa en Grand Bourg. 415 m² totales (170 m² cubiertos), pileta, quincho, 4 dorm (2 en suite), altillo y cochera doble.",
     specs: { bedrooms: 4, bathrooms: 2, area: 415, garage: 2 },
-    badge: "Ubicación",
-    badgeType: "new",
+    badge: "Ubicación Clave",
+    badgeType: "location",
     location: "B° Grand Bourg - Salta",
     type: "Casa",
     ogImage: null
@@ -67,10 +67,10 @@ const properties = [
 ];
 
 const badgeStyles = {
-  featured: "from-amber-500 to-orange-600",
-  new: "from-emerald-500 to-teal-600",
-  investment: "from-blue-500 to-indigo-600",
-  premium: "from-purple-500 to-pink-600"
+  gated: "from-amber-500 to-orange-600",
+  premium: "from-purple-600 to-fuchsia-600",
+  investment: "from-blue-600 to-indigo-600",
+  location: "from-emerald-500 to-teal-600"
 };
 
 const containerVariants = {
@@ -108,10 +108,58 @@ const cardVariants = {
 function FeaturedPropertiesSection() {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [favoriteCards, setFavoriteCards] = useState(new Set());
-  
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [slidesPerView, setSlidesPerView] = useState(3);
+  const [slideWidth, setSlideWidth] = useState(0);
+  const [gap, setGap] = useState(40); // px
+  const containerRef = React.useRef(null);
+
   const { scrollY } = useScroll();
   const backgroundY = useTransform(scrollY, [0, 1000], [0, -150]);
   const backgroundOpacity = useTransform(scrollY, [0, 500], [1, 0.7]);
+
+  // Calcular layout (ancho de cada slide y gap) para evitar cortes
+  React.useEffect(() => {
+    const compute = () => {
+      if (!containerRef.current) return;
+      const w = window.innerWidth;
+      const spv = w < 768 ? 1 : 3;
+      // Sin gap cuando es 1 por vista para centrar correctamente
+      const g = spv === 1 ? 0 : 40;
+      setGap(g);
+      setSlidesPerView(spv);
+      const containerWidth = containerRef.current.offsetWidth;
+      const sw = Math.floor((containerWidth - g * (spv - 1)) / spv);
+      setSlideWidth(sw);
+      setCurrentIndex(0);
+    };
+    compute();
+    window.addEventListener('resize', compute);
+    return () => window.removeEventListener('resize', compute);
+  }, []);
+
+  const maxIndex = React.useMemo(() => Math.max(0, properties.length - slidesPerView), [slidesPerView]);
+
+  const goNext = () => {
+    setCurrentIndex(i => (i >= maxIndex ? 0 : i + 1));
+  };
+  const goPrev = () => {
+    setCurrentIndex(i => (i <= 0 ? maxIndex : i - 1));
+  };
+
+  // Drag logic
+  const trackRef = React.useRef(null);
+  const handleDragEnd = (event, info) => {
+    const threshold = 80; // px
+    if (info.offset.x < -threshold) {
+      goNext();
+    } else if (info.offset.x > threshold) {
+      goPrev();
+    } else {
+      // Snap back
+      setCurrentIndex(i => i);
+    }
+  };
 
   const toggleFavorite = (id) => {
     const newFavorites = new Set(favoriteCards);
@@ -226,37 +274,49 @@ function FeaturedPropertiesSection() {
           </motion.div>
         </motion.div>
 
-        {/* Grid de propiedades con efectos 3D */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-        >
-          {properties.map((property, i) => (
-            <motion.div
-              key={property.id}
-              variants={cardVariants}
-              onHoverStart={() => setHoveredCard(property.id)}
-              onHoverEnd={() => setHoveredCard(null)}
-              whileHover={{ 
-                scale: 1.02, 
-                y: -15,
-                rotateY: 3,
-                rotateX: 2,
-                transition: { 
-                  type: "spring", 
-                  stiffness: 300,
-                  damping: 30
-                }
-              }}
-              className="group relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-xl overflow-hidden transition-all duration-500"
-              style={{
-                transformStyle: "preserve-3d",
-                perspective: "1000px"
-              }}
+        {/* Slider de propiedades */}
+        <div className="relative" ref={containerRef}>
+          {/* Controles (desktop + mobile) */}
+          <div className="flex absolute -top-20 right-0 z-30 gap-2 sm:gap-3">
+            <button
+              onClick={goPrev}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:scale-105 hover:text-remax-blue active:scale-95 transition"
+              aria-label="Anterior"
             >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button
+              onClick={goNext}
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white shadow-lg border border-gray-200 flex items-center justify-center hover:scale-105 hover:text-remax-blue active:scale-95 transition"
+              aria-label="Siguiente"
+            >
+              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+
+          <motion.div ref={trackRef} className="overflow-hidden">
+            <motion.div
+              drag="x"
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
+              className="flex select-none px-0"
+              style={{ columnGap: `${gap}px` }}
+              animate={{ x: slideWidth ? -(currentIndex * (slideWidth + gap)) : 0 }}
+              transition={{ type: 'spring', stiffness: 90, damping: 18 }}
+            >
+              {properties.map((property, i) => (
+                <motion.div
+                  key={property.id}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  onHoverStart={() => setHoveredCard(property.id)}
+                  onHoverEnd={() => setHoveredCard(null)}
+                  whileHover={{ scale: 1.02, y: -10, transition: { type: 'spring', stiffness: 300, damping: 30 } }}
+                  className="group relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl shadow-xl overflow-hidden transition-all duration-500"
+                  style={{ flex: '0 0 auto', width: slideWidth ? `${slideWidth}px` : '100%' }}
+                >
               {/* Efecto de brillo en hover */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-3xl"
@@ -264,20 +324,15 @@ function FeaturedPropertiesSection() {
                 whileHover={{ opacity: 1 }}
               />
 
-              {/* Badge premium animado */}
+              {/* Badge animado coherente */}
               <motion.div
-                initial={{ scale: 0, rotate: -45, opacity: 0 }}
-                whileInView={{ scale: 1, rotate: 0, opacity: 1 }}
+                initial={{ scale: 0, y: -10, opacity: 0 }}
+                whileInView={{ scale: 1, y: 0, opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: i * 0.1 + 0.5, type: "spring" }}
-                className={`absolute top-6 left-6 bg-gradient-to-r ${badgeStyles[property.badgeType]} text-white px-4 py-2 rounded-full text-xs font-bold z-20 shadow-lg backdrop-blur-sm`}
+                transition={{ duration: 0.6, delay: 0.3 + i * 0.05, type: 'spring', stiffness: 260, damping: 18 }}
+                className={`absolute top-5 left-5 bg-gradient-to-r ${badgeStyles[property.badgeType]} text-white px-4 py-1.5 rounded-full text-[11px] font-semibold z-20 shadow-lg backdrop-blur-sm tracking-wide`}
               >
-                <motion.span
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400 }}
-                >
-                  {property.badge}
-                </motion.span>
+                {property.badge}
               </motion.div>
 
               {/* Imagen con efectos premium */}
@@ -457,9 +512,23 @@ function FeaturedPropertiesSection() {
                 className="absolute inset-0 bg-gradient-to-br from-remax-red/5 to-remax-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
                 style={{ transform: "translateZ(-1px)" }}
               />
+                </motion.div>
+              ))}
             </motion.div>
-          ))}
-        </motion.div>
+          </motion.div>
+
+          {/* Dots */}
+          <div className="flex justify-center gap-2 mt-10 md:mt-12">
+            {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-3 h-3 rounded-full transition ${idx === currentIndex ? 'bg-gradient-to-r from-remax-red to-remax-blue scale-110' : 'bg-gray-300 hover:bg-gray-400'}`}
+                aria-label={`Ir al slide ${idx + 1}`}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Call to Action */}
         <motion.div

@@ -112,7 +112,7 @@ function RecruitmentSection() {
   }, []);
 
   return (
-  <section id="reclutamiento" className="relative py-24 sm:py-32 lg:py-40 bg-gradient-to-br from-slate-50 via-white to-indigo-50 overflow-hidden">
+  <section id="reclutamiento" className="relative py-24 sm:py-32 lg:py-40 bg-white overflow-hidden">
       {/* Fondos animados premium */}
       <motion.div
         style={{ y: y1, opacity }}
