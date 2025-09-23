@@ -185,7 +185,7 @@ function RecruitmentSection() {
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Únete al equipo inmobiliario más exitoso del Noroeste Argentino y transforma 
+            Unite al equipo inmobiliario más exitoso del Noroeste Argentino y transforma 
             tu futuro profesional con oportunidades ilimitadas de crecimiento
           </motion.p>
 
