@@ -6,18 +6,21 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import RecruitmentSection from "./components/RecruitmentSection";
 import OfficeGallerySection from "./components/OfficeGallerySection";
 import ContactForm from "./components/ContactForm";
+import BrokerSection from "./components/BrokerSection";
 import Footer from "./components/Footer";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <HeroSection />
-      <RecruitmentSection />
-      <TestimonialsSection />
-      <FeaturedPropertiesSection />
-      <OfficeGallerySection />
-      <Footer />
+  <HeroSection />
+  {/* Sección Nosotros reemplazada por OfficeGallerySection */}
+  <OfficeGallerySection />
+  <RecruitmentSection />
+  <TestimonialsSection />
+  <FeaturedPropertiesSection />
+  <BrokerSection />
+    <Footer />
     </div>
   );
 }

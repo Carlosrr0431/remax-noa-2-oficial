@@ -102,7 +102,7 @@ function HeroSection() {
 
       {/* GLOBO FLOTANTE - Aparece junto con el texto descriptivo */}
       <motion.div
-        className="absolute top-10 w-52 md:w-60 h-52 md:h-60 hidden md:flex items-center justify-center"
+        className="absolute top-16 md:top-20 lg:top-24 w-52 md:w-60 h-52 md:h-60 hidden md:flex items-center justify-center"
         style={{
           zIndex: 9999,
  
@@ -150,7 +150,7 @@ function HeroSection() {
           x: xSpring,
           rotateY: xSpring
         }}
-  className="relative z-30 w-full max-w-5xl mx-auto px-4 text-center md:mt-40 lg:mt-48"
+  className="relative z-30 w-full max-w-5xl mx-auto px-4 text-center md:mt-32 lg:mt-36 xl:mt-40"
       >
         {/* Globo móvil (separado para evitar solapamiento) */}
         <div className="flex md:hidden items-center justify-center mb-6">
@@ -186,7 +186,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.2, delay: 1.8 }}
           whileHover={{ scale: 1.02 }}
-          className="text-lg sm:text-xl md:text-2xl text-white/95 mb-10 sm:mb-12 max-w-xl sm:max-w-2xl mx-auto font-light backdrop-blur-sm bg-black/30 md:bg-white/5 px-6 py-5 rounded-3xl border border-white/10 shadow-2xl leading-snug"
+          className="text-lg sm:text-xl md:text-2xl text-white/95 mb-8 sm:mb-10 max-w-xl sm:max-w-2xl mx-auto font-light backdrop-blur-sm bg-black/30 md:bg-white/5 px-6 py-5 rounded-3xl border border-white/10 shadow-2xl leading-snug"
         >
           <span className="block text-center">Transforma tu futuro inmobiliario</span>
           <span className="block text-center mt-1">
@@ -292,7 +292,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.6, duration: 1 }}
-            className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8 text-white/80 text-xs sm:text-sm"
+            className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-4 md:mt-6 text-white/80 text-xs sm:text-sm"
           >
             <motion.div 
               className="text-center min-w-[90px]"

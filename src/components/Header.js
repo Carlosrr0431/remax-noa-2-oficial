@@ -4,9 +4,9 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 
 const navItems = [
   { name: "Inicio", href: "#", highlight: true, icon: "home" },
+  { name: "Nosotros", href: "#nosotros", icon: "about" },
   { name: "Únete al equipo", href: "#reclutamiento", cta: true, icon: "team" },
   { name: "Propiedades", href: "#propiedades", icon: "building" },
-  { name: "Contacto", href: "#contacto", icon: "contact" },
 ];
 
 const iconComponents = {
@@ -29,6 +29,11 @@ const iconComponents = {
     <svg className={props.className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
     </svg>
+  ),
+  about: (props) => (
+    <svg className={props.className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
   )
 };
 
@@ -48,7 +53,7 @@ function Header() {
       setScrolled(scrollPosition > 50);
       
       // Detect active section
-      const sections = ['hero', 'reclutamiento', 'propiedades', 'testimonios', 'contacto'];
+  const sections = ['hero', 'nosotros', 'reclutamiento', 'propiedades', 'testimonios', 'contacto'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -66,6 +71,11 @@ function Header() {
   }, []);
 
   const smoothScroll = (href) => {
+    if (href === '#' || href === '#top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setMenuOpen(false);
+      return;
+    }
     const targetId = href.replace('#', '');
     const targetElement = document.getElementById(targetId);
     if (targetElement) {
