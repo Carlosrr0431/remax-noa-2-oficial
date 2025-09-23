@@ -336,11 +336,11 @@ function FeaturedPropertiesSection() {
               </motion.div>
 
               {/* Imagen con efectos premium */}
-              <div className="relative overflow-hidden rounded-t-3xl cursor-pointer" onClick={() => window.open(property.url, '_blank', 'noopener') }>
+              <div className="relative overflow-hidden rounded-t-3xl cursor-pointer bg-gray-100" onClick={() => window.open(property.url, '_blank', 'noopener') }>
                 <motion.img 
                   src={property.ogImage || property.img} 
                   alt={property.title} 
-                  className="w-full h-64 object-cover transition-all duration-700"
+                  className="w-full h-64 object-cover transition-all duration-700 [image-rendering:auto]"
                   whileHover={{ 
                     scale: 1.15,
                     filter: "brightness(1.08) contrast(1.08)"
@@ -348,6 +348,12 @@ function FeaturedPropertiesSection() {
                   transition={{ duration: 0.8 }}
                   loading="lazy"
                   decoding="async"
+                  onError={(e) => {
+                    if (!e.target.dataset.fallback) {
+                      e.target.dataset.fallback = '1';
+                      e.target.src = 'data:image/svg+xml;utf8,' + encodeURIComponent(`<?xml version='1.0' encoding='UTF-8'?>\n<svg xmlns='http://www.w3.org/2000/svg' width='640' height='360' viewBox='0 0 640 360' preserveAspectRatio='xMidYMid slice'>\n<defs>\n<linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>\n<stop stop-color='%23E11D48' offset='0'/>\n<stop stop-color='%232563EB' offset='1'/>\n</linearGradient>\n</defs>\n<rect width='640' height='360' fill='url(%23g)'/>\n<text x='50%' y='50%' fill='white' font-family='Inter,Arial' font-size='28' dominant-baseline='middle' text-anchor='middle'>Imagen no disponible</text>\n<text x='50%' y='65%' fill='white' font-family='Inter,Arial' font-size='16' dominant-baseline='middle' text-anchor='middle'>RE/MAX NOA</text>\n</svg>`);
+                    }
+                  }}
                 />
                 
                 {/* Overlay con gradiente premium */}
