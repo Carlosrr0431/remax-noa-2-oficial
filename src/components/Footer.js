@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 function Footer() {
   return (
-  <footer id="contacto" className="bg-slate-900 text-gray-300 py-12">
+  <footer className="bg-slate-900 text-gray-300 py-12">
       <div className="max-w-6xl mx-auto px-4 flex flex-col gap-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <div className="flex items-center gap-3">
@@ -19,8 +19,8 @@ function Footer() {
           </div>
           <div className="text-sm flex flex-col sm:items-end gap-1">
             <span>Salta Capital - Argentina</span>
-            <a href="tel:+543811234567" className="hover:text-white">+54 381 123 4567</a>
-            <a href="mailto:info@remax-noa.com.ar" className="hover:text-white">info@remax-noa.com.ar</a>
+            <a href="tel:+5493876852073" className="hover:text-white">+54 9 387 685 2073</a>
+            <a href="mailto:noa@remax.com.ar" className="hover:text-white">noa@remax.com.ar</a>
           </div>
         </div>
         <div className="pt-6 border-t border-white/10 text-xs flex flex-col sm:flex-row justify-between items-start gap-4">

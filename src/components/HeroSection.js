@@ -223,7 +223,9 @@ function HeroSection() {
           className="relative"
         >
           <motion.a
-            href="#reclutamiento"
+            href="https://remaxnoa.com.ar/sumate"
+            target="_blank"
+            rel="noopener noreferrer"
             whileHover={{ 
               scale: 1.08, 
               y: -5,

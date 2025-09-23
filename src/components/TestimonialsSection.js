@@ -147,7 +147,9 @@ function TestimonialsSection() {
           className="text-center"
         >
           <a
-            href="#reclutamiento"
+            href="https://remaxnoa.com.ar/sumate"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-3 bg-gradient-to-r from-remax-red to-remax-blue text-white px-8 py-4 rounded-full font-bold text-lg shadow-2xl hover:scale-105 transition-transform"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

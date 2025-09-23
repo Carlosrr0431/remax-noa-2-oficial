@@ -419,44 +419,44 @@ function RecruitmentSection() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <motion.button
-              className="group relative bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue text-white px-8 sm:px-12 lg:px-16 py-4 sm:py-5 rounded-full font-black text-lg sm:text-xl lg:text-2xl shadow-2xl overflow-hidden transition-all duration-500"
-              whileHover={{
-                boxShadow: "0 25px 50px rgba(225,29,72,0.4), 0 0 0 1px rgba(255,255,255,0.1)"
-              }}
+            <motion.a
+              href="https://remaxnoa.com.ar/sumate"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative inline-flex items-center gap-4 sm:gap-6 px-8 sm:px-12 py-4 sm:py-5 rounded-full font-bold text-white text-base sm:text-lg lg:text-xl bg-gradient-to-r from-remax-red via-pink-500 to-remax-blue shadow-xl focus:outline-none focus:ring-4 focus:ring-remax-red/30 overflow-hidden"
+              whileHover={{ scale: 1.05, y: -4, boxShadow: '0 20px 40px -8px rgba(225,29,72,0.45)' }}
+              whileTap={{ scale: 0.95 }}
             >
-              {/* Efecto de brillo deslizante */}
-              <motion.div
+              {/* Brillo animado */}
+              <motion.span
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12"
-                initial={{ x: "-100%" }}
-                animate={{ x: "100%" }}
-                transition={{ 
-                  duration: 3, 
-                  repeat: Infinity, 
-                  repeatDelay: 5,
-                  ease: "easeInOut"
-                }}
+                initial={{ x: '-100%' }}
+                animate={{ x: '100%' }}
+                transition={{ duration: 3, repeat: Infinity, repeatDelay: 5 }}
               />
-              
-              <span className="relative z-10 flex items-center gap-3 sm:gap-4">
-                <motion.span
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                >
-                  🚀
-                </motion.span>
-                ¡Inicia tu carrera HOY!
-                <motion.svg
-                  className="w-5 h-5 sm:w-7 sm:h-7 lg:w-8 lg:h-8 group-hover:translate-x-3 transition-transform duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  whileHover={{ x: 8, rotate: 15 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </motion.svg>
+              {/* Icon */}
+              <motion.span
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/30"
+                animate={{ rotate: [0, 8, -8, 0] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <span className="text-xl sm:text-2xl">🚀</span>
+              </motion.span>
+              {/* Text */}
+              <span className="flex flex-col -space-y-0.5 text-left">
+                <span className="text-[10px] sm:text-xs tracking-wider font-semibold uppercase opacity-90">Sumate Hoy</span>
+                <span className="leading-tight text-sm sm:text-lg font-black">Impulsá tu Carrera</span>
               </span>
-            </motion.button>
+              {/* Arrow */}
+              <motion.span
+                className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 border border-white/30"
+                whileHover={{ x: 4 }}
+              >
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </motion.span>
+            </motion.a>
           </motion.div>
 
           <motion.p 

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const socials = [
   {
     name: 'Instagram',
-    href: 'https://instagram.com/',
+    href: 'https://www.instagram.com/pablocastaneda.ok',
     gradient: 'from-pink-500 via-rose-500 to-purple-500',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -14,7 +14,7 @@ const socials = [
   },
   {
     name: 'Facebook',
-    href: 'https://facebook.com/',
+    href: 'https://www.facebook.com/pablocastanedabroker',
     gradient: 'from-blue-600 to-blue-800',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -24,11 +24,21 @@ const socials = [
   },
   {
     name: 'LinkedIn',
-    href: 'https://linkedin.com/',
+    href: 'https://www.linkedin.com/in/pablo-casta%C3%B1eda-66ba89316/',
     gradient: 'from-sky-600 to-blue-700',
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065Zm1.782 13.019H3.555V9h3.564v11.452Z" />
+      </svg>
+    )
+  },
+  {
+    name: 'Perfil RE/MAX',
+    href: 'https://www.remax.com.ar/agent/pablo-castaneda',
+    gradient: 'from-red-600 via-rose-600 to-blue-600',
+    icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 2 2 7l10 5 9-4.5V13h2V7L12 2Zm0 7L5.5 7 12 4l6.5 3L12 9Zm-7 4v3l7 3 7-3v-3l-7 3-7-3Z" />
       </svg>
     )
   }
@@ -153,6 +163,17 @@ function BrokerSection() {
               <p className="text-gray-600 leading-relaxed text-sm md:text-base font-medium">
                 Lidera con visión clara, foco en productividad y desarrollo humano. Su abordaje combina estrategia comercial, acompañamiento profesional y adopción temprana de tecnología para acelerar resultados.
               </p>
+              <div>
+                <a
+                  href="https://www.remax.com.ar/agent/pablo-castaneda"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-2 bg-gradient-to-r from-remax-red to-remax-blue text-white px-5 py-3 rounded-xl font-semibold shadow hover:shadow-lg hover:scale-105 transition"
+                >
+                  Ver Perfil RE/MAX
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+                </a>
+              </div>
             </div>
 
             <div className="space-y-5">

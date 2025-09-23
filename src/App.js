@@ -8,6 +8,7 @@ import OfficeGallerySection from "./components/OfficeGallerySection";
 import ContactForm from "./components/ContactForm";
 import BrokerSection from "./components/BrokerSection";
 import Footer from "./components/Footer";
+import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
   <FeaturedPropertiesSection />
   <BrokerSection />
     <Footer />
+    <FloatingWhatsAppButton />
     </div>
   );
 }

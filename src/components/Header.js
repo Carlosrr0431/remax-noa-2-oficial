@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
+// Navegación reducida (solo secciones solicitadas)
 const navItems = [
   { name: "Inicio", href: "#", highlight: true, icon: "home" },
   { name: "Nosotros", href: "#nosotros", icon: "about" },
   { name: "Únete al equipo", href: "#reclutamiento", cta: true, icon: "team" },
-  { name: "Propiedades", href: "#propiedades", icon: "building" },
+  { name: "Propiedades", href: "#propiedades", icon: "building" }
 ];
 
 const iconComponents = {
@@ -52,8 +53,8 @@ function Header() {
       const scrollPosition = window.scrollY;
       setScrolled(scrollPosition > 50);
       
-      // Detect active section
-  const sections = ['hero', 'nosotros', 'reclutamiento', 'propiedades', 'testimonios', 'contacto'];
+    // Detectar sección activa (solo las que están en el menú)
+  const sections = ['hero', 'nosotros', 'reclutamiento', 'propiedades'];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -70,21 +71,28 @@ function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Scroll suave con compensación para evitar que el header tape el inicio de la sección
   const smoothScroll = (href) => {
-    if (href === '#' || href === '#top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    try {
+      if (href === '#' || href === '#top') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setMenuOpen(false);
+        return;
+      }
+      const targetId = href.replace('#', '');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const headerEl = document.querySelector('header');
+        const headerHeight = headerEl ? headerEl.offsetHeight : 80;
+        const extraOffset = 12; // pequeño margen extra visual
+        const y = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - extraOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    } catch (e) {
+      console.warn('Smooth scroll error', e);
+    } finally {
       setMenuOpen(false);
-      return;
     }
-    const targetId = href.replace('#', '');
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-    setMenuOpen(false);
   };
 
   return (
