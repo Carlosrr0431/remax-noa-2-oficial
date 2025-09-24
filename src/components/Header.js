@@ -33,7 +33,7 @@ const iconComponents = {
   ),
   about: (props) => (
     <svg className={props.className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
     </svg>
   )
 };
@@ -109,7 +109,7 @@ function Header() {
         background: 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 100%)',
         WebkitBackdropFilter: `blur(${headerBlur}px)`
       }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-out ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ease-out hidden md:block ${
         scrolled 
           ? 'shadow-2xl border-b border-gray-200/30' 
           : 'border-b border-white/20 shadow-lg'

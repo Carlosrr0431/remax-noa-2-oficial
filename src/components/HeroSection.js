@@ -112,7 +112,7 @@ function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 md:pt-32 pb-16"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-32 pb-28 md:pb-16"
       id="hero"
     >
 
@@ -232,7 +232,7 @@ function HeroSection() {
           x: xSpring,
           rotateY: xSpring
         }}
-  className="relative z-30 w-full max-w-5xl mx-auto px-4 text-center md:mt-32 lg:mt-36 xl:mt-40"
+  className="relative z-30 w-full max-w-5xl mx-auto px-4 text-center mt-6 md:mt-32 lg:mt-36 xl:mt-40"
       >
         {/* Globo móvil (separado para evitar solapamiento) */}
         <div className="flex md:hidden items-center justify-center mb-6">
@@ -268,7 +268,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 1.2, delay: 1.8 }}
           whileHover={{ scale: 1.02 }}
-          className="text-lg sm:text-xl md:text-2xl text-white/95 mb-8 sm:mb-10 max-w-xl sm:max-w-2xl mx-auto font-light backdrop-blur-sm bg-black/30 md:bg-white/5 px-6 py-5 rounded-3xl border border-white/10 shadow-2xl leading-snug"
+          className="text-base sm:text-xl md:text-2xl text-white/95 mb-6 sm:mb-10 max-w-xl sm:max-w-2xl mx-auto font-light backdrop-blur-sm bg-black/30 md:bg-white/5 px-5 py-4 rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl leading-snug"
         >
           <span className="block text-center">Transforma tu futuro inmobiliario</span>
           <span className="block text-center mt-1">
@@ -314,7 +314,7 @@ function HeroSection() {
               boxShadow: "0 20px 40px rgba(225,29,72,0.4), 0 0 0 1px rgba(255,255,255,0.1)"
             }}
             whileTap={{ scale: 0.95 }}
-            className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-remax-red via-red-500 to-remax-blue text-white px-8 sm:px-10 md:px-12 py-4 md:py-5 rounded-full font-bold text-lg md:text-xl shadow-2xl transition-all duration-500 overflow-hidden"
+            className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-remax-red via-red-500 to-remax-blue text-white px-6 sm:px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-base md:text-lg shadow-2xl transition-all duration-500 overflow-hidden"
           >
             {/* Efecto de brillo deslizante */}
             <motion.div
@@ -341,7 +341,7 @@ function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </motion.svg>
             
-            <span className="relative z-10">¡Sumate a RE/MAX NOA!</span>
+            <span className="relative z-10">¡Sumate!</span>
             {/* Texto CTA simplificado para evitar repetición de marca en exceso */}
             {/* <span className="relative z-10">¡Sumate al Equipo!</span> */}
             

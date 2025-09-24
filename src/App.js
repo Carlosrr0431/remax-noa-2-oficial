@@ -9,6 +9,7 @@ import ContactForm from "./components/ContactForm";
 import BrokerSection from "./components/BrokerSection";
 import Footer from "./components/Footer";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
+import BottomNav from "./components/BottomNav";
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
       <BrokerSection />
       <Footer />
       <FloatingWhatsAppButton />
+      <BottomNav />
     </div>
   );
 }

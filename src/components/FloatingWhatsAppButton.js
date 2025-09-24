@@ -43,11 +43,11 @@ function FloatingWhatsAppButton() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 40 }}
           transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-          className={[
-            'fixed z-[60] right-4 sm:right-6',
-            'bottom-[calc(1.25rem+env(safe-area-inset-bottom))] sm:bottom-[calc(1.75rem+env(safe-area-inset-bottom))]',
-            'group focus:outline-none'
-          ].join(' ')}
+            className={[
+              'hidden md:flex fixed z-[60] right-4 sm:right-6',
+              'bottom-[calc(1.25rem+env(safe-area-inset-bottom))] sm:bottom-[calc(1.75rem+env(safe-area-inset-bottom))]',
+              'group focus:outline-none'
+            ].join(' ')}
         >
           {/* Halo */}
           <motion.div
