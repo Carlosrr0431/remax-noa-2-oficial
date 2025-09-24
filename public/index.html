@@ -66,7 +66,8 @@
     <!-- Performance Hints -->
     <link rel="dns-prefetch" href="//maps.googleapis.com" />
     <link rel="dns-prefetch" href="//www.google-analytics.com" />
-    <link rel="preload" href="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf%20(10%20x%202%20in)%20(1).png" as="image" />
+  <link rel="preload" href="/assets/REMAX_mastrBalloon_RGB_R.pdf.pdf%20(10%20x%202%20in)%20(1).png" as="image" />
+  <link rel="preload" href="/assets/og-sumate.png" as="image" />
     
     <!-- Critical CSS Inline -->
     <style>
@@ -86,6 +87,47 @@
       /* Performance optimizations */
       img, video { max-width: 100%; height: auto; }
       .optimize-rendering { will-change: transform, opacity; backface-visibility: hidden; }
+
+      /* Initial Loader Overlay */
+      #initial-loader {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(1200px 600px at 50% 30%, rgba(37,99,235,0.08), transparent 60%),
+                    radial-gradient(1000px 500px at 20% 70%, rgba(225,29,72,0.08), transparent 60%),
+                    linear-gradient(135deg, #F8FAFC 0%, #FFFFFF 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2147483647;
+        transition: opacity .6s ease;
+      }
+      .initial-loader-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .initial-spinner {
+        width: 64px; height: 64px; border-radius: 50%;
+        background: conic-gradient(#E11D48, #2563EB, #E11D48);
+        -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+                mask: radial-gradient(farthest-side, transparent calc(100% - 8px), #000 0);
+        animation: spin 1s linear infinite;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      }
+      .initial-brand {
+        font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        font-weight: 800;
+        letter-spacing: .02em;
+        background: linear-gradient(90deg, #E11D48, #2563EB);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; color: transparent;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
+
+      /* Root fade-in to avoid FOUC */
+      #root { opacity: 0; transition: opacity .45s ease; }
+      body.loading { overflow: hidden; }
     </style>
     
     <!-- Structured Data / Schema.org -->
@@ -154,7 +196,14 @@
       gtag('config', 'AW-17524106517');
     </script>
   </head>
-  <body class="bg-white safe-area">
+  <body class="bg-white safe-area loading">
+    <!-- Initial Loader (replaced by React on mount) -->
+    <div id="initial-loader" aria-hidden="true">
+      <div class="initial-loader-inner">
+        <div class="initial-spinner" role="status" aria-label="Cargando"></div>
+        <div class="initial-brand">RE/MAX NOA</div>
+      </div>
+    </div>
     <!-- App Root -->
     <div id="root"></div>
     

@@ -6,8 +6,14 @@ const PHONE_NUMBER = '5493876852073';
 const WHATSAPP_URL = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent('Hola, quisiera más información sobre RE/MAX NOA')}`;
 
 function FloatingWhatsAppButton() {
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    const onReady = () => setVisible(true);
+    window.addEventListener('app:ready', onReady, { once: true });
+    return () => window.removeEventListener('app:ready', onReady);
+  }, []);
 
   useEffect(() => {
     let lastY = window.scrollY;

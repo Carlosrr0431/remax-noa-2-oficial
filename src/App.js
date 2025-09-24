@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import FeaturedPropertiesSection from "./components/FeaturedPropertiesSection";
@@ -11,6 +11,13 @@ import Footer from "./components/Footer";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton";
 
 function App() {
+  useEffect(() => {
+    // Señal mínima para coordinar fade del loader sin flashes
+    const fire = () => window.dispatchEvent(new Event('app:ready'));
+    // next frame + micro demora para asegurar estilos aplicados
+    requestAnimationFrame(() => setTimeout(fire, 50));
+  }, []);
+
   return (
     <div className="App">
       <Header />

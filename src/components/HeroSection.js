@@ -7,6 +7,8 @@ function HeroSection() {
   const [posterData, setPosterData] = useState(null);
   const [videoReady, setVideoReady] = useState(false);
   const videoRef = useRef(null);
+  const defaultPoster = (typeof window !== 'undefined') ? '/assets/og-sumate.png' : undefined;
+  const heroReadyFired = useRef(false);
   const { scrollY } = useScroll();
   const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
@@ -49,30 +51,62 @@ function HeroSection() {
     return () => clearInterval(interval);
   }, [words.length, prefersReducedMotion]);
 
-  // Capturar primer frame del video para usarlo como poster (mejor experiencia de carga / compartir)
+  // Capturar primer frame del video para usarlo como poster
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const handleLoadedData = () => {
+    // Generar lo antes posible con loadedmetadata + seeked
+    const handleLoadedMetadata = () => {
+      try {
+        // fuerza decodificar primer frame
+        video.currentTime = 0.01;
+      } catch {}
+    };
+    const fireHeroReady = () => {
+      if (!heroReadyFired.current) {
+        heroReadyFired.current = true;
+        window.dispatchEvent(new Event('hero:ready'));
+      }
+    };
+    const handleSeeked = () => {
       try {
         const canvas = document.createElement('canvas');
         canvas.width = video.videoWidth || 1280;
         canvas.height = video.videoHeight || 720;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.75);
         setPosterData(dataUrl);
+        fireHeroReady();
       } catch (e) {
         console.warn('No se pudo generar poster dinámico:', e);
       }
     };
-    const handleCanPlay = () => setVideoReady(true);
-    video.addEventListener('loadeddata', handleLoadedData, { once: true });
+    const handleCanPlay = () => { setVideoReady(true); fireHeroReady(); };
+    video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('seeked', handleSeeked, { once: true });
     video.addEventListener('canplay', handleCanPlay, { once: true });
+    // Fallback: si en 2000ms no se generó poster, intentar con draw del frame actual
+    const t = window.setTimeout(() => {
+      if (!posterData) {
+        try {
+          const canvas = document.createElement('canvas');
+          canvas.width = video.videoWidth || 1280;
+          canvas.height = video.videoHeight || 720;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+          setPosterData(dataUrl);
+          fireHeroReady();
+        } catch {}
+      }
+    }, 2000);
     return () => {
-      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('seeked', handleSeeked);
       video.removeEventListener('canplay', handleCanPlay);
+      window.clearTimeout(t);
     };
   }, [prefersReducedMotion]);
 
@@ -83,15 +117,19 @@ function HeroSection() {
     >
 
       {/* Poster estático (primer frame) detrás mientras el video prepara */}
-      {posterData && (
-        <img
-          src={posterData}
+      <img
+        src={posterData || defaultPoster}
           alt="Primer frame video RE/MAX NOA"
           aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700 ${videoReady ? 'opacity-0' : 'opacity-100'}`}
-          style={{ zIndex: 1 }}
-        />
-      )}
+        className={`absolute inset-0 w-full h-full object-cover scale-105 transition-opacity duration-700 ${videoReady ? 'opacity-0' : 'opacity-100'}`}
+        style={{ zIndex: 1 }}
+        onLoad={() => {
+          if (!heroReadyFired.current) {
+            heroReadyFired.current = true;
+            window.dispatchEvent(new Event('hero:ready'));
+          }
+        }}
+      />
       {/* Video de fondo con parallax (se muestra cuando está listo) */}
       <motion.video
         ref={videoRef}
@@ -101,9 +139,11 @@ function HeroSection() {
         loop={!prefersReducedMotion}
         muted
         playsInline
-        preload="auto"
-        poster={posterData || undefined}
+        preload="metadata"
+        poster={posterData || defaultPoster}
       >
+  {/* Preferir webm si está disponible en public/assets para mejor compresión */}
+  <source src={'/assets/hero-video.webm'} type="video/webm" />
         <source src={require('../assets/video 1920x1080_convención 2024 (1).mp4')} type="video/mp4" />
         {/* Fallback simple */}
       </motion.video>
